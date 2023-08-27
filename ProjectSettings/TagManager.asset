@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Jump
+  - Enemy
+  - Item
+  - Platform
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Ground
+  - Wall
+  - Enemy
+  - Item
+  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Map
+    uniqueID: 3159943071
+    locked: 0
+  - name: Flowers
+    uniqueID: 2390481353
+    locked: 0
+  - name: Enemy
+    uniqueID: 300915399
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Items
+    uniqueID: 1087491725
+    locked: 0
+  - name: fo da fridge
+    uniqueID: 1588346603
+    locked: 0
