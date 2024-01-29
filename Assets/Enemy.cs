@@ -13,7 +13,7 @@ public abstract class Enemy : MonoBehaviour
 {
 
     [SerializeField] private int health = 2; 
-    [SerializeField] private int damage = 1; 
+    [SerializeField] protected int damage = 1; 
 
     [HideInInspector] public Game g; 
 
@@ -27,14 +27,14 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private float knockbackx = 2; 
     [SerializeField] private float knockbacky = 2; 
     public Transform collision; 
-    [HideInInspector] public float direction = 1; 
+    [HideInInspector] public float direction = 1; // direction is used for walking only not determining attack direction
     [HideInInspector] public float walkingTime; 
     private bool isFacingRight = true;
 
-    private Transform player; 
+    protected Transform player; 
 
-    [HideInInspector] public Animator anim; 
-    [HideInInspector] public bool attacking; 
+    protected Animator anim; 
+    protected bool attacking; 
     [HideInInspector] public bool gettingHit = false; 
     [SerializeField] private GameObject hitEffect;
 

@@ -50,6 +50,9 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private GameObject hitEffect; 
 
+    private bool parry; 
+    private bool gracePeriod; 
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -57,11 +60,17 @@ public class Movement : MonoBehaviour
         g = GameObject.Find("GameTime").GetComponent<Game>(); 
         health = 3; 
         throwable = null; 
+        this.parry = false; 
+        this.gracePeriod = false; 
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(parry) {
+            return; 
+        }
 
         // attacking  
         if(Input.GetKeyDown(KeyCode.X) && !attacking) {
@@ -80,6 +89,11 @@ public class Movement : MonoBehaviour
             if(Physics2D.OverlapCircle(t.position, .2f, groundLayer)) 
                 index = i; 
             isGrounded = isGrounded || Physics2D.OverlapCircle(t.position, .2f, groundLayer);
+        }
+
+        // controls for parrying 
+        if(isGrounded && Input.GetKeyDown(KeyCode.RightShift) && !parry) {
+            StartCoroutine(Parry()); 
         }
 
         // reseting the number of jumps the player has 
@@ -164,7 +178,7 @@ public class Movement : MonoBehaviour
     }
 
     void FixedUpdate(){
-        if(isDashing || gettingHit)
+        if(isDashing || gettingHit || parry)
             return;
         // moving the player left and right 
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);     
@@ -178,6 +192,32 @@ public class Movement : MonoBehaviour
             localScale.x *= -1; 
             transform.localScale = localScale;
         }
+    }
+
+    private IEnumerator Parry() {
+        parry = true; 
+        // add parry effect 
+        UnityEngine.Rendering.Universal.Light2D light = this.hitEffect.GetComponent<UnityEngine.Rendering.Universal.Light2D>(); 
+        Color color = light.color; 
+        light.color = new Color(80, 67, 67); 
+        float intensity = light.intensity; 
+        float falloffIntensity = light.falloffIntensity;
+        light.falloffIntensity = 1; 
+        light.intensity = .1f; 
+        this.hitEffect.SetActive(true); 
+        yield return new WaitForSeconds(.5f);
+        light.falloffIntensity = falloffIntensity;
+        light.intensity = intensity; 
+        light.color = color; 
+        this.hitEffect.SetActive(false); 
+        parry = false; 
+    }
+
+    // After the player gets hit there is a grace period where they can't get hit. 
+    private IEnumerator GracePeriod() {
+        this.gracePeriod = true; 
+        yield return new WaitForSeconds(1f); 
+        this.gracePeriod = false; 
     }
 
     // plays the animation for swinging the weapon
@@ -219,6 +259,9 @@ public class Movement : MonoBehaviour
  
     // The player takes damage also adds knockback force to the player based on inputs 
     public IEnumerator Damage(int damage, float direction, float knockbackx, float knockbacky) {
+        if(parry || gracePeriod) {
+            yield break; 
+        }
         health -= damage; 
         g.PlayerHealth(health, false); 
         gettingHit = true; 

@@ -2624,20 +2624,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 2
   damage: 1
+  g: {fileID: 0}
   rb: {fileID: 0}
+  boxCollider: {fileID: 0}
   speed: 2
   jumpForce: 2
   attackRange: 3
   knockbackx: 2
   knockbacky: 2
   collision: {fileID: 6381211372962028984}
-  anim: {fileID: 0}
-  attacking: 0
+  direction: 1
+  walkingTime: 0
   gettingHit: 0
   hitEffect: {fileID: 6732591594295241791}
   drops:
   - {fileID: 4543132033570197647, guid: 46f62678ae05d404f88eb299aea787fc, type: 3}
-  items:
+  throwingItems:
   - {fileID: 665594724100466641}
   - {fileID: 665594725714612566}
   effects:

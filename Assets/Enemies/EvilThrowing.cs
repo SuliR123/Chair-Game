@@ -26,7 +26,7 @@ public class EvilThrowing : EnemyThrowing
     // Update is called once per frame
     public void Update()
     {
-
+   
     }
 
     // fires this object with given x and y value 
@@ -41,9 +41,9 @@ public class EvilThrowing : EnemyThrowing
             // if the object is coming from the right apply knockback left else apply knockback right 
             if(transform.position.x - collision.gameObject.transform.position.x > 0)
                 direction = -1; 
-            StartCoroutine(collision.gameObject.GetComponent<Movement>().Damage(damage, direction, knockbackx, knockbacky)); 
-            transform.position = new Vector3(100,100,0); 
+            StartCoroutine(collision.gameObject.GetComponent<Movement>().Damage(damage, direction, knockbackx, knockbacky));         
         }
+        transform.position = new Vector3(100,100,0); 
     }
 
 }

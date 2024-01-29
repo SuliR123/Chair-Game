@@ -8,12 +8,12 @@ Represents an enemy that fires given items
 
 public abstract class ThrowingEnemy : Enemy
 {
-    [SerializeField] private GameObject[] items; 
+    [SerializeField] private GameObject[] throwingItems; 
 
     // fires every item in items array with delay between shots and given x and y speed
     // direction doesn't need to be accounted for when passing in x speed 
     public IEnumerator ThrowItems(float delay, float x, float y) {
-        foreach (GameObject item in items)
+        foreach (GameObject item in throwingItems)
         {
             if(Alive()) {
                 EnemyThrowing e = item.GetComponent<EnemyThrowing>(); 

@@ -107,7 +107,7 @@ public class Game : MonoBehaviour
         GameObject enemy = Instantiate(enemies[rand], spawnPoints[randSpawn].position, spawnPoints[randSpawn].rotation);
         enemy.GetComponent<Enemy>().SetId(numSpawned); 
         currentEnemies.Add(enemy.GetComponent<Enemy>().GetId(), enemy); 
-        print(currentEnemies.Count); 
+        //print(currentEnemies.Count); 
         numSpawned++; 
         spawn = false; 
         yield return new WaitForSeconds(1); 
